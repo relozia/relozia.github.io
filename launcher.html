@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shrike Launcher</title>
+<meta name="description" content="Shrike Launcher, a third party launcher for Minecraft: Java Edition. In development.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="sky"></canvas>
+<div class="veil"></div>
+
+<nav><div class="wrap">
+	<a class="brand" href="index.html">
+		<svg viewBox="0 0 100 100"><path d="M 50 20 C 53.5 20 55.5 23 55 27 L 55.5 31 C 64 28 73 23 82 24 C 90 26 96 32 100 40 C 92 41 82 43 72 46 C 64 48 60 49 57 51 L 57 66 L 62 80 C 57 82 53.5 83 50 83 Z" fill="#E0703A"/><path d="M 50 20 C 46.5 20 44.5 23 45 27 L 44.5 31 C 36 28 27 23 18 24 C 10 26 4 32 0 40 C 8 41 18 43 28 46 C 36 48 40 49 43 51 L 43 66 L 38 80 C 43 82 46.5 83 50 83 Z" fill="#E0703A"/></svg>
+		Shrike
+	</a>
+	<ul>
+		<li><a href="features.html">Features</a></li>
+		<li><a href="launcher.html">Launcher</a></li>
+		<li><a href="https://github.com/relozia/shrike">Download</a></li>
+	</ul>
+</div></nav>
+
+<main class="page"><div class="wrap">
+	<p class="status"><i></i> In development, nothing to download yet</p>
+	<h1>Shrike Launcher</h1>
+	<p class="sub">A third party launcher for Minecraft: Java Edition on Windows. It signs you into your own Microsoft account, downloads the official game files from Mojang, and launches them.</p>
+	<p class="meta">Started November 2026. There is no release and no download link on this page yet.</p>
+
+	<section style="padding:48px 0 0">
+		<h2>What it will do</h2>
+		<div class="items">
+			<div class="item"><h3>Sign in</h3><p>Microsoft account sign in, like any other launcher you've used. Your account is completely safe. There is no offline or unauthenticated way to play.</p></div>
+			<div class="item"><h3>Install the game</h3><p>Download Minecraft from Mojang's own manifests, check every file, and keep it in its own folder. Nothing of Mojang's is redistributed by us.</p></div>
+			<div class="item"><h3>Profiles</h3><p>A Shrike profile with the client and its mods set up, or just play with a normal profile with vanilla, fabric, or neoforge.</p></div>
+			<div class="item"><h3>Skins and capes</h3><p>Change your Minecraft skin, switch between the capes your account already owns, and preview both. You can also make custom capes here too which other Shrike users will be able to see.</p></div>
+		</div>
+	</section>
+
+	<div class="callout">
+		<h3>Where it's up to</h3>
+		<p>Early stages of development currently. The client mod is the finished part of this project and the launcher is just starting. Minecraft 26.2 only to begin with.</p>
+		<p>Updates will be given at a later date.</p>
+	</div>
+
+	<section style="padding:48px 0 0">
+		<h2>Until then</h2>
+		<p class="sub">Shrike works as a normal Fabric mod. Drop it in your mods folder with any launcher you already use.</p>
+		<div class="btns" style="margin-top:22px">
+			<a class="btn primary" href="https://github.com/relozia/shrike">Get the mod</a>
+			<a class="btn ghost" href="features.html">See what's in it</a>
+		</div>
+	</section>
+</div></main>
+
+<footer><div class="wrap">
+	<div class="flinks">
+		<a href="features.html">Features</a>
+		<a href="launcher.html">Launcher</a>
+		<a href="https://github.com/relozia/shrike">Source</a>
+	</div>
+	GPL-3.0-or-later. Not an official Minecraft product, and not approved by or associated with Mojang.
+</div></footer>
+
+<script src="sky.js"></script>
+<script>
+window.addEventListener("load", () => window.Sky && window.Sky.set(0.62));
+const nv = document.querySelector("nav");
+addEventListener("scroll", () => nv.classList.toggle("stuck", scrollY > 8), { passive: true });
+</script>
+</body>
+</html>

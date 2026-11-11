@@ -1,0 +1,4 @@
+* text=auto
+CNAME text eol=lf
+*.webp binary
+*.svg text eol=lf

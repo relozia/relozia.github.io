@@ -1,0 +1,212 @@
+/* palette straight out of gui/Ui.java so the page and the client are one product, not two lookalikes */
+:root {
+	--bg: #0b0e13;
+	--panel: #10141a;
+	--raised: rgba(255, 255, 255, 0.055);
+	--raised-hi: rgba(255, 255, 255, 0.1);
+	--line: rgba(220, 230, 245, 0.11);
+	--text: #f1f4f8;
+	--muted: #959fad;
+	--faint: #6c7682;
+	--accent: #e0703a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: Inter, "Segoe UI", system-ui, sans-serif;
+	line-height: 1.55;
+	-webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
+}
+
+#sky { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -2; display: block; }
+/* no webgl: a flat dawn gradient rather than a blank page */
+.no-sky #sky { background: linear-gradient(180deg, #2b4a7a, #e8976a); }
+
+/* the page sits in a dark well so the sky reads as something behind it, not as the background */
+.veil {
+	position: fixed; inset: 0; z-index: -1; pointer-events: none;
+	background: radial-gradient(130% 80% at 50% 0%, rgba(11, 14, 19, 0.35), rgba(11, 14, 19, 0.88) 62%, rgba(11, 14, 19, 0.97));
+}
+
+.wrap { width: min(1140px, calc(100% - 48px)); margin-inline: auto; }
+
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 30; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
+nav.stuck { background: rgba(11, 14, 19, .7); backdrop-filter: blur(16px); border-bottom-color: var(--line); }
+nav .wrap { display: flex; align-items: center; gap: 30px; height: 70px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; letter-spacing: -.01em; color: inherit; text-decoration: none; }
+.brand svg { width: 22px; height: 22px; }
+nav ul { display: flex; gap: 26px; list-style: none; margin: 0 0 0 auto; padding: 0; }
+nav a { color: var(--muted); text-decoration: none; font-size: 14.5px; transition: color .15s; }
+nav a:hover { color: var(--text); }
+
+h1 { font-size: clamp(40px, 5.6vw, 64px); line-height: 1.03; letter-spacing: -.04em; font-weight: 600; margin: 0 0 20px; max-width: 13ch; }
+h2 { font-size: 30px; letter-spacing: -.03em; font-weight: 600; margin: 0 0 12px; }
+.lede { color: var(--muted); font-size: 17.5px; max-width: 46ch; margin: 0 0 30px; }
+
+.btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; padding: 12px 22px; border-radius: 9px; font-size: 14.5px; font-weight: 500; text-decoration: none; border: 1px solid transparent; transition: background .15s, transform .15s, box-shadow .2s; }
+.btn.primary { background: var(--accent); color: #150c06; }
+.btn.primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(224, 112, 58, .3); }
+.btn.ghost { border-color: var(--line); background: var(--raised); color: var(--text); }
+.btn.ghost:hover { background: var(--raised-hi); transform: translateY(-2px); }
+
+/* ---------- hero ---------- */
+
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 110px 0 60px; }
+.hero .wrap { display: grid; grid-template-columns: 1fr 1.05fr; gap: 60px; align-items: center; }
+.stage { position: relative; }
+
+/* the hud the demo turns on, sitting behind the menu like it would in game */
+.hud { position: absolute; inset: 0; pointer-events: none; }
+.hud > * { position: absolute; opacity: 0; }
+/* the real widget's geometry, from KeystrokesWidget: 26px keys, 3px gaps, 84 wide, jump bar 14.3 tall */
+.keys { top: -46px; left: -104px; display: grid; grid-template-columns: repeat(3, 26px); grid-template-rows: 26px 26px 26px 14px; gap: 3px; }
+.keys i, .keys .jump { border-radius: 5px; background: rgba(16, 20, 26, .78); border: 1px solid var(--line); }
+.keys i { display: grid; place-items: center; font-style: normal; font-size: 11px; color: var(--muted); line-height: 1; }
+/* place all four, not just W. leaving the rest to auto flow put A beside W and pushed S and D onto row two */
+.keys .w { grid-area: 1 / 2; }
+.keys .a { grid-area: 2 / 1; }
+.keys .s { grid-area: 2 / 2; }
+.keys .d { grid-area: 2 / 3; }
+/* the mouse row and the jump bar span the full width, which doesn't line up with the 3 key columns */
+.keys .mrow { grid-area: 3 / 1 / 4 / 4; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+.keys .mrow i { font-size: 9.5px; gap: 1px; }
+.keys .mrow em { font-style: normal; font-size: 7.5px; color: var(--faint); }
+.keys .jump { grid-area: 4 / 1 / 5 / 4; }
+.keys i.lit, .keys .jump.lit { background: var(--accent); border-color: transparent; }
+.keys i.lit { color: #150c06; }
+.keys i.lit em { color: rgba(21, 12, 6, .7); }
+/* same left edge as the keys so the two read as one arrangement rather than two strays */
+.cps { bottom: -30px; left: -104px; background: rgba(16, 20, 26, .78); border: 1px solid var(--line); border-radius: 7px; padding: 5px 11px; font-size: 13px; color: var(--muted); }
+.cps b { color: var(--text); font-weight: 600; }
+
+/* ---------- the menu, rebuilt in html ---------- */
+
+.menu { position: relative; border: 1px solid var(--line); border-radius: 16px; background: rgba(16, 20, 26, .74); backdrop-filter: blur(24px); display: grid; grid-template-columns: 152px 1fr; overflow: hidden; box-shadow: 0 30px 70px rgba(0, 0, 0, .5); }
+.rail { background: rgba(8, 11, 15, .5); border-right: 1px solid var(--line); padding: 14px 10px; }
+.rail .brand { font-size: 14px; padding: 4px 6px 14px; }
+.rail .brand svg { width: 15px; height: 15px; }
+.search { border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; color: var(--faint); font-size: 12.5px; margin-bottom: 12px; }
+.cat { display: flex; justify-content: space-between; padding: 6px 8px; border-radius: 7px; font-size: 13px; color: var(--muted); transition: background .15s, color .15s; }
+.cat span { color: var(--faint); font-size: 12px; }
+.cat.on { background: var(--raised); color: var(--text); }
+
+.rows { padding: 8px; }
+.mod { display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 10px; transition: background .15s; cursor: pointer; }
+.mod + .mod { border-top: 1px solid rgba(220, 230, 245, .055); }
+.mod:hover { background: var(--raised); }
+.mod .chip { width: 30px; height: 30px; flex: none; border-radius: 9px; background: var(--raised); display: grid; place-items: center; color: var(--muted); font-size: 13px; }
+.mod b { display: block; font-size: 14.5px; font-weight: 500; letter-spacing: -.01em; }
+.mod small { display: block; color: var(--faint); font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mod .txt { min-width: 0; }
+
+.sw { appearance: none; margin: 0 0 0 auto; flex: none; width: 38px; height: 21px; border-radius: 11px; background: var(--raised-hi); position: relative; cursor: pointer; transition: background .18s; }
+.sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 15px; height: 15px; border-radius: 50%; background: #b9c1cc; transition: left .18s cubic-bezier(.4, 0, .2, 1), background .18s; }
+.sw:checked { background: var(--accent); }
+.sw:checked::after { left: 20px; background: #fff; }
+.sw:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* blocked rows: dimmed, switch dead, reason in place of the description. mirrors the real menu */
+.mod.blocked { opacity: .45; }
+.mod.blocked .sw { pointer-events: none; }
+.mod .why { display: none; color: var(--accent); }
+.mod.blocked .why { display: block; }
+.mod.blocked .desc { display: none; }
+
+/* the demo cursor */
+.ghost { position: absolute; top: 0; left: 0; width: 18px; height: 18px; z-index: 5; pointer-events: none; opacity: 0; filter: drop-shadow(0 2px 5px rgba(0, 0, 0, .6)); }
+.tap { position: absolute; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; border: 2px solid var(--accent); opacity: 0; pointer-events: none; z-index: 4; }
+.handover { margin-top: 18px; font-size: 13.5px; color: var(--faint); opacity: 0; }
+
+/* ---------- pinned blacklist scene ---------- */
+
+.scene { position: relative; }
+.scene .pin { min-height: 100vh; display: flex; align-items: center; }
+.scene .wrap { display: grid; grid-template-columns: 1fr 1.05fr; gap: 60px; align-items: center; }
+.beat { color: var(--muted); font-size: 17px; max-width: 42ch; }
+.beat b { color: var(--text); font-weight: 600; }
+
+.toast { position: absolute; right: 0; top: -14px; width: 290px; background: rgba(16, 20, 26, .94); border: 1px solid var(--line); border-left: 2px solid var(--accent); border-radius: 10px; padding: 13px 15px; opacity: 0; box-shadow: 0 18px 44px rgba(0, 0, 0, .5); }
+.toast b { display: block; font-size: 14px; margin-bottom: 5px; }
+.toast p { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+.toast ul { margin: 7px 0 0; padding-left: 15px; font-size: 12.5px; color: var(--muted); }
+
+section { padding: 96px 0; }
+.calm { border-top: 1px solid var(--line); background: rgba(11, 14, 19, .55); backdrop-filter: blur(10px); }
+.items { margin-top: 26px; }
+.item { display: grid; grid-template-columns: 190px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid rgba(220, 230, 245, .07); }
+.item:first-child { border-top: 0; }
+.item h3 { margin: 0; font-size: 16px; font-weight: 600; }
+.item p { margin: 0; color: var(--muted); font-size: 15px; max-width: 58ch; }
+
+footer { padding: 44px 0 80px; color: var(--faint); font-size: 14px; background: rgba(11, 14, 19, .8); }
+
+.note { position: fixed; left: 16px; bottom: 16px; z-index: 40; background: rgba(16, 20, 26, .92); border: 1px solid var(--line); border-radius: 9px; padding: 9px 13px; font-size: 13px; color: var(--muted); }
+.note b { color: var(--text); font-weight: 600; }
+
+@media (max-width: 900px) {
+	.hero .wrap, .scene .wrap { grid-template-columns: 1fr; gap: 44px; }
+	.item { grid-template-columns: 1fr; gap: 6px; }
+	.hud { display: none; }
+	nav ul { gap: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* { transition: none !important; animation: none !important; }
+}
+
+/* ---------- shared chrome for the calm pages ---------- */
+
+.page { padding: 136px 0 40px; }
+.page h1 { font-size: clamp(34px, 4.4vw, 48px); max-width: 18ch; }
+.sub { color: var(--muted); font-size: 17px; max-width: 54ch; margin: 0 0 8px; }
+.meta { color: var(--faint); font-size: 14px; margin: 0; }
+
+.shot { margin: 0; }
+.shot img { width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 13px; background: #0d1117; }
+.shot figcaption { color: var(--faint); font-size: 13.5px; margin-top: 10px; }
+
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; }
+.wide { margin-top: 32px; }
+
+/* module lists: rows and hairlines, the same shape the menu itself uses */
+.cats { margin-top: 36px; }
+.catblock { padding: 26px 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 210px 1fr; gap: 32px; }
+.catblock:first-child { border-top: 0; }
+.catblock h3 { margin: 0; font-size: 17px; font-weight: 600; }
+.catblock .count { color: var(--faint); font-size: 14px; margin-top: 2px; }
+.catblock ul { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: 32px; }
+.catblock li { color: var(--muted); font-size: 14.5px; padding: 3px 0; break-inside: avoid; }
+
+.callout { margin-top: 34px; border: 1px solid var(--line); border-left: 2px solid var(--accent); border-radius: 12px; padding: 22px 24px; background: rgba(255, 255, 255, .03); }
+.callout h3 { margin: 0 0 8px; font-size: 17px; }
+.callout p { margin: 0 0 10px; color: var(--muted); font-size: 15px; }
+.callout p:last-child { margin-bottom: 0; }
+
+.steps { margin-top: 26px; counter-reset: s; }
+.step { display: grid; grid-template-columns: 30px 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid rgba(220, 230, 245, .07); }
+.step:first-child { border-top: 0; }
+.step::before { counter-increment: s; content: counter(s); color: var(--faint); font-size: 14px; padding-top: 1px; }
+.step p { margin: 0; color: var(--muted); font-size: 15px; }
+.step b { color: var(--text); font-weight: 600; display: block; margin-bottom: 2px; }
+
+code { background: rgba(255, 255, 255, .07); border-radius: 5px; padding: 2px 6px; font-size: .9em; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; }
+
+.status { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 999px; padding: 5px 13px; font-size: 13.5px; color: var(--muted); margin-bottom: 20px; }
+.status i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); font-style: normal; }
+
+footer nav { position: static; }
+.flinks { display: flex; gap: 22px; flex-wrap: wrap; margin-bottom: 10px; }
+.flinks a { color: var(--muted); text-decoration: none; font-size: 14px; }
+.flinks a:hover { color: var(--text); }
+
+@media (max-width: 760px) {
+	.pair { grid-template-columns: 1fr; }
+	.catblock { grid-template-columns: 1fr; gap: 10px; }
+	.catblock ul { columns: 1; }
+}

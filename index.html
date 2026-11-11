@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shrike</title>
+<meta name="description" content="A PvP client for Minecraft 26.2. Right Shift opens the menu.">
+<meta property="og:title" content="Shrike">
+<meta property="og:description" content="A PvP client for Minecraft 26.2. Right Shift opens the menu.">
+<meta property="og:image" content="https://shrike.lol/img/menu.webp">
+<meta property="og:url" content="https://shrike.lol/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="sky"></canvas>
+<div class="veil"></div>
+
+<nav><div class="wrap">
+	<a class="brand" href="index.html">
+		<svg viewBox="0 0 100 100"><path d="M 50 20 C 53.5 20 55.5 23 55 27 L 55.5 31 C 64 28 73 23 82 24 C 90 26 96 32 100 40 C 92 41 82 43 72 46 C 64 48 60 49 57 51 L 57 66 L 62 80 C 57 82 53.5 83 50 83 Z" fill="#E0703A"/><path d="M 50 20 C 46.5 20 44.5 23 45 27 L 44.5 31 C 36 28 27 23 18 24 C 10 26 4 32 0 40 C 8 41 18 43 28 46 C 36 48 40 49 43 51 L 43 66 L 38 80 C 43 82 46.5 83 50 83 Z" fill="#E0703A"/></svg>
+		Shrike
+	</a>
+	<ul>
+		<li><a href="features.html">Features</a></li>
+		<li><a href="launcher.html">Launcher</a></li>
+		<li><a href="https://github.com/relozia/shrike">Download</a></li>
+	</ul>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+	<div>
+		<h1>A PvP client for Minecraft 26.2</h1>
+		<p class="lede">Right Shift opens the menu. 87 modules, a HUD you arrange by dragging it, and nothing turned on until you turn it on.</p>
+		<div class="btns">
+			<a class="btn primary" href="https://github.com/relozia/shrike">Download</a>
+			<a class="btn ghost" href="features.html">See what's in it</a>
+		</div>
+	</div>
+
+	<div class="stage" id="stage">
+		<div class="hud">
+			<div class="keys" id="w-keys">
+				<i class="k w">W</i><i class="k a">A</i><i class="k s lit">S</i><i class="k d">D</i>
+				<div class="mrow"><i class="lmb">LMB<em>7 CPS</em></i><i class="rmb">RMB<em>0 CPS</em></i></div>
+				<div class="jump"></div>
+			</div>
+			<div class="cps" id="w-cps">CPS <b>7</b></div>
+		</div>
+
+		<div class="menu" id="menu">
+			<div class="rail">
+				<div class="brand">
+					<svg viewBox="0 0 100 100"><path d="M 50 20 C 53.5 20 55.5 23 55 27 L 55.5 31 C 64 28 73 23 82 24 C 90 26 96 32 100 40 C 92 41 82 43 72 46 C 64 48 60 49 57 51 L 57 66 L 62 80 C 57 82 53.5 83 50 83 Z" fill="#E0703A"/><path d="M 50 20 C 46.5 20 44.5 23 45 27 L 44.5 31 C 36 28 27 23 18 24 C 10 26 4 32 0 40 C 8 41 18 43 28 46 C 36 48 40 49 43 51 L 43 66 L 38 80 C 43 82 46.5 83 50 83 Z" fill="#E0703A"/></svg>
+					Shrike
+				</div>
+				<div class="search">Search</div>
+				<div class="cat on">All <span>87</span></div>
+				<div class="cat">HUD <span>33</span></div>
+				<div class="cat">Visual <span>20</span></div>
+				<div class="cat">Combat <span>11</span></div>
+				<div class="cat">Chat <span>6</span></div>
+				<div class="cat">Utility <span>17</span></div>
+			</div>
+			<div class="rows">
+				<label class="mod" data-id="keystrokes"><span class="chip">K</span><span class="txt"><b>Keystrokes</b><small class="desc">Your movement keys and clicks as you press them.</small><small class="why">Blacklisted on FunTime</small></span><input class="sw" type="checkbox"></label>
+				<label class="mod" data-id="cps"><span class="chip">C</span><span class="txt"><b>CPS</b><small class="desc">Clicks per second.</small><small class="why">Blacklisted on FunTime</small></span><input class="sw" type="checkbox"></label>
+				<label class="mod" data-id="cooldown_hud"><span class="chip">T</span><span class="txt"><b>Cooldown HUD</b><small class="desc">Every item on cooldown, with how long is left.</small><small class="why">Blacklisted on FunTime</small></span><input class="sw" type="checkbox" checked></label>
+				<label class="mod" data-id="auto_gg"><span class="chip">G</span><span class="txt"><b>Auto GG</b><small class="desc">Says gg when a game ends.</small><small class="why">Blacklisted on FunTime</small></span><input class="sw" type="checkbox" checked></label>
+				<label class="mod" data-id="armor_hud"><span class="chip">A</span><span class="txt"><b>Armor HUD</b><small class="desc">Armor durability as hotbar style slots.</small><small class="why">Blacklisted on FunTime</small></span><input class="sw" type="checkbox"></label>
+			</div>
+		</div>
+
+		<svg class="ghost" id="ghost" viewBox="0 0 16 18"><path d="M1 1 L1 15 L5 11.5 L7.5 17 L10 16 L7.5 10.5 L13 10.5 Z" fill="#fff" stroke="#0b0e13" stroke-width="1.2" stroke-linejoin="round"/></svg>
+		<div class="tap" id="tap"></div>
+	</div>
+</div></header>
+
+<div class="scene" id="blacklist">
+	<div class="pin" id="pin"><div class="wrap">
+		<div>
+			<h2>Blacklisted modules</h2>
+			<p class="beat" id="beat">Some servers don't allow certain modules. Shrike reads a public list and turns those off when you join.</p>
+		</div>
+		<div class="stage">
+			<div class="toast" id="toast">
+				<b>Blacklisted Modules</b>
+				<p>The following modules are blacklisted on this server and have been disabled:</p>
+				<ul><li>Cooldown HUD</li><li>Auto GG</li></ul>
+			</div>
+		</div>
+	</div></div>
+</div>
+
+<section class="calm"><div class="wrap">
+	<h2>In the game</h2>
+
+	<figure class="shot wide">
+		<img src="img/hud.webp" alt="A fight on a PvP server with the Shrike HUD showing keystrokes, FPS, ping, armor durability and a damage number over the opponent" loading="lazy" width="1600" height="844">
+	</figure>
+
+	<div class="pair">
+		<figure class="shot">
+			<img src="img/editor.webp" alt="The Shrike HUD editor with widgets being dragged and a toolbar along the bottom" loading="lazy" width="1600" height="844">
+			<figcaption>Drag anything anywhere. Snap and grid live in the toolbar.</figcaption>
+		</figure>
+		<figure class="shot">
+			<img src="img/armor.webp" alt="The Armor HUD settings page in the Shrike menu, showing a long list of options" loading="lazy" width="1600" height="844">
+			<figcaption>Most modules have more settings than you'll want.</figcaption>
+		</figure>
+	</div>
+
+	<div class="btns" style="margin-top:34px">
+		<a class="btn primary" href="https://github.com/relozia/shrike">Download</a>
+		<a class="btn ghost" href="features.html">The full list</a>
+	</div>
+</div></section>
+
+<footer><div class="wrap">
+	<div class="flinks">
+		<a href="features.html">Features</a>
+		<a href="launcher.html">Launcher</a>
+		<a href="https://github.com/relozia/shrike">Source</a>
+	</div>
+	GPL-3.0-or-later. Not an official Minecraft product, and not approved by or associated with Mojang.
+</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="sky.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
